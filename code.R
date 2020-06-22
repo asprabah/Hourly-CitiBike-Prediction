@@ -1,3 +1,6 @@
+#Aravindh Siddharth Prabaharan
+#Hourly CitiBike Predition
+
 #CSV compilation--------------------------------------------------
 
 d3=read.csv('G:/JC-201903-citibike-tripdata.csv', header=TRUE)
