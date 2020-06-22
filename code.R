@@ -1,17 +1,17 @@
 #CSV compilation--------------------------------------------------
 
-d3=read.csv('G:/Transportation Analytics/project/trip_data/JC-201903-citibike-tripdata.csv', header=TRUE)
-d4=read.csv('G:/Transportation Analytics/project/trip_data/JC-201904-citibike-tripdata.csv', header=TRUE)
-d5=read.csv('G:/Transportation Analytics/project/trip_data/JC-201905-citibike-tripdata.csv', header=TRUE)
-d6=read.csv('G:/Transportation Analytics/project/trip_data/JC-201906-citibike-tripdata.csv', header=TRUE)
-d7=read.csv('G:/Transportation Analytics/project/trip_data/JC-201907-citibike-tripdata.csv', header=TRUE)
-d8=read.csv('G:/Transportation Analytics/project/trip_data/JC-201908-citibike-tripdata.csv', header=TRUE)
-d9=read.csv('G:/Transportation Analytics/project/trip_data/JC-201909-citibike-tripdata.csv', header=TRUE)
-d10=read.csv('G:/Transportation Analytics/project/trip_data/JC-201910-citibike-tripdata.csv', header=TRUE)
-d11=read.csv('G:/Transportation Analytics/project/trip_data/JC-201911-citibike-tripdata.csv', header=TRUE)
-d12=read.csv('G:/Transportation Analytics/project/trip_data/JC-201912-citibike-tripdata.csv', header=TRUE)
-d13=read.csv('G:/Transportation Analytics/project/trip_data/JC-202001-citibike-tripdata.csv', header=TRUE)
-d14=read.csv('G:/Transportation Analytics/project/trip_data/JC-202002-citibike-tripdata.csv', header=TRUE)
+d3=read.csv('G:/JC-201903-citibike-tripdata.csv', header=TRUE)
+d4=read.csv('G:/JC-201904-citibike-tripdata.csv', header=TRUE)
+d5=read.csv('G:/JC-201905-citibike-tripdata.csv', header=TRUE)
+d6=read.csv('G:/JC-201906-citibike-tripdata.csv', header=TRUE)
+d7=read.csv('G:/JC-201907-citibike-tripdata.csv', header=TRUE)
+d8=read.csv('G:/JC-201908-citibike-tripdata.csv', header=TRUE)
+d9=read.csv('G:/JC-201909-citibike-tripdata.csv', header=TRUE)
+d10=read.csv('G:/JC-201910-citibike-tripdata.csv', header=TRUE)
+d11=read.csv('G:/JC-201911-citibike-tripdata.csv', header=TRUE)
+d12=read.csv('G:/JC-201912-citibike-tripdata.csv', header=TRUE)
+d13=read.csv('G:/JC-202001-citibike-tripdata.csv', header=TRUE)
+d14=read.csv('G:/JC-202002-citibike-tripdata.csv', header=TRUE)
 d3$date = as.Date(d3$starttime, format = "%Y-%m-%d")
 d4$date = as.Date(d4$starttime, format = "%Y-%m-%d")
 d5$date = as.Date(d5$starttime, format = "%Y-%m-%d")
@@ -26,10 +26,10 @@ d13$date = as.Date(d13$starttime, format = "%Y-%m-%d")
 d14$date = as.Date(d14$starttime, format = "%Y-%m-%d")
 zfull=rbind(d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14)
 sum(is.na(zfull))
-write.csv(zfull,'G:\\Transportation Analytics\\project\\trip_data\\zfull.csv',row.names = FALSE)
+write.csv(zfull,'G:\\project\\trip_data\\zfull.csv',row.names = FALSE)
 
 # Part1 (station extract)-------------------------------------------------------------------
-full=read.csv('G:/Transportation Analytics/project/trip_data/zfull.csv', header=TRUE)
+full=read.csv('G:/project/trip_data/zfull.csv', header=TRUE)
 library(dplyr)
 sum(is.na(full))
 colnames(full)
@@ -60,7 +60,7 @@ percent = round(nrow(fulln)/nrow(full), 3) * 100
 
 # Part2 (weather merge)-------------------------------------------------------------------
 
-darksky=read.csv('G:/Transportation Analytics/project/dark_sky.csv', header=TRUE)
+darksky=read.csv('G:/project/dark_sky.csv', header=TRUE)
 fulln_model=fulln[,c("starttime","stoptime","start.station.id","end.station.id","date")]
 
 #extracting date,month,year,time
@@ -183,7 +183,7 @@ pred_lr=round(predict(linreg,train))
 eval_results(train$checkout_count_hr,pred_lr,train)
 
 
-# bosting -----------------------------------------------------------------
+# gradient bosting -----------------------------------------------------------------
 
 library(gbm)
 gbmboosting <- gbm(checkout_count_hr~.,data =  train, n.trees=500, interaction.depth = 3,shrinkage = 0.05)
@@ -245,11 +245,8 @@ x1 <- test %>% select(start.station.id,month,
 y1= test$checkout_count_hr
 ridge_predicted <- round(predict(ridfit, s = opt_lambda, newx = x))
 
-ridge_predicted[75]
-train$checkout_count_hr[75]
-
 eval_results(train$checkout_count_hr,ridge_predicted,train)
-#Lasso----
+#lasso reg----
 library(tidyverse)
 library(broom)
 library(glmnet)
