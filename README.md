@@ -1,23 +1,23 @@
-# Hourly-CitiBike-Prediction
-
-# Visualization of New York City Motor Vehicle Collisions Data 
+# Hourly-CitiBike-Prediction in Jersey City
 
 Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ---
 
 ## Introduction
-*The data is pulled from NYC Open Data.*
-*It consists of records for motor vehicle damage worth more than $1000 and casualties.*
-*The key factors used in this data visualization are contributing factors for the crash, Number of persons injured, Number of persons     killed, crash date, crash time and crash location.*
+*Largest network in United States; imperative for transportation infrastructure.*
+*Durable bikes locked in network of docking station  (Available 24/7).*
+*Access available in Manhattan, Brooklyn, Queens and Jersey City.*
+*May, 2019 bikes available to rent on Lyft Application.*
+
+## Objective
+To predict the checkout count of Citi Bikes at a given hour in Jersey City, thereby, determining the influence of weather on stations with high checkout frequency
 
 ---
 
 ## Sources
-- The source code came from [NYC Open Data](https://opendata.cityofnewyork.us/)
-- The code retrieves data from [API source](https://data.cityofnewyork.us/Public-Safety/Motor-Vehicle-Collisions-Crashes/h9gi-nx95)
-- The link to create a account in [Socrata](https://dev.socrata.com/foundry/data.cityofnewyork.us/h9gi-nx95)
-- The code to create a heatmap using [Seaborn Package](https://dev.socrata.com/foundry/data.cityofnewyork.us/h9gi-nx95)
+- The source code came from [CitiBike](https://www.citibikenyc.com/system-data)
+- The code retrieves weather data from [Darksky API](https://darksky.net/dev)
 - The link to use [Gmap](https://cloud.google.com/maps-platform/)
 ---
 
