@@ -1,4 +1,4 @@
-# Hourly-CitiBike-Prediction in Jersey City
+# Hourly CitiBike Prediction in Jersey City
 
 Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
@@ -16,7 +16,7 @@ To predict the checkout count of Citi Bikes at a given hour in Jersey City, ther
 ---
 
 ## Sources
-- The source code came from [CitiBike](https://www.citibikenyc.com/system-data)
+- The data came from [CitiBike](https://www.citibikenyc.com/system-data)
 - The code retrieves weather data from [Darksky API](https://darksky.net/dev)
 - The link to use [Gmap](https://cloud.google.com/maps-platform/)
 ---
