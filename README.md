@@ -12,6 +12,7 @@ Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ## Objective
 To predict the checkout count of Citi Bikes at a given hour in Jersey City, thereby, determining the influence of weather on stations with high checkout frequency
+![Image of Plot](images/Flow chart.png)
 
 ---
 
@@ -66,6 +67,9 @@ Finally, we visualize the data.  We save our plot as a `.jpeg` image:
 ```
 The output from this code is shown below:
 ![Image of Plot](images/GMAPS.jpeg)
+Distribution of trips at different hour
+![Image of Plot](images/trip_hr.png)
+
 ```
 #---------------------Weather Data merge-------------------------------------------------
 darksky=read.csv('G:/project/dark_sky.csv', header=TRUE)
@@ -102,7 +106,7 @@ The output from this code is shown below:
 Predictor Influence on each model:
 ![Image of Plot](images/after_pred.jpg)
 
-![Image of Plot](images/model_frame.jpg)
+![Image of Plot](images/model_frame.JPG)
 
 
 #### Best Model Result
