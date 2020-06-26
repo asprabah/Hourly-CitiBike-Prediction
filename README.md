@@ -12,6 +12,7 @@ Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ## Objective
 To predict the checkout count of Citi Bikes at a given hour in Jersey City, thereby, determining the influence of weather on stations with high checkout frequency
+![Image of Plot](images/Flow chart.png)
 
 ---
 
@@ -49,9 +50,9 @@ fulln_model$hour=tm1.lt$hour
 
 
 ### Data Visualization:
-#### Visualization of prominent Contributing Factors using Stacked Bar and Pie Chart
+#### Visualization of Stations
 ```
-#---------------------GMAPS------------------------------------------------
+#------------------------Visualizing using Gmaps-------------------------------
 
 library(ggmap)
 ggmap::register_google(key = "YOUR KEY")
@@ -66,6 +67,9 @@ Finally, we visualize the data.  We save our plot as a `.jpeg` image:
 ```
 The output from this code is shown below:
 ![Image of Plot](images/GMAPS.jpeg)
+Distribution of trips at different hour
+![Image of Plot](images/trip_hr.png)
+
 ```
 #---------------------Weather Data merge-------------------------------------------------
 darksky=read.csv('G:/project/dark_sky.csv', header=TRUE)
@@ -96,52 +100,31 @@ The merge of weather with CitiBike data is shown:
 The output from this code is shown below:
 ![Image of Plot](images/merge.jpg)
 
-#### Heatmap (Monthly vs Weekly)
+#### Process for Filtering of predictors and Model framework used for modeling
+![Image of Plot](images/predictor_flow.jpg)
+
+Predictor Influence on each model:
+![Image of Plot](images/after_pred.jpg)
+
+![Image of Plot](images/model_frame.JPG)
+
+
+#### Best Model Result
 
 ```
-heatmap_df1["Month"] = pd.Categorical(heatmap_df1["Month"], heatmap_df1.Month.unique()) 
-plt.figure(figsize = (15, 9)) # Assigning figure size (length & breadth) for the plot
-file_long = heatmap_df1.pivot("Weekday", "Month", "Crash_Count") # Assigning the column names for which the heatmap needs to be plotted
-sns.heatmap(file_long, cmap = 'viridis', annot=True, fmt=".0f") # Plotting the map
-plt.title("Heatmap of Crash Count in New York City (Monthly vs Weekly)", fontsize = 14); # Assigning title for the plot
-plt.savefig('Heatmap1.jpg') # Saving the plot
-```
-The output from this code is shown below:
-![Image of Plot](images/Heatmap1.jpg)
+#------------------------Gradient Boosting results-------------------------------
 
-#### Heatmap (Weekly vs Hourly)
-```
-heatmap_df2["Weekday"] = pd.Categorical(heatmap_df2["Weekday"], heatmap_df2.Weekday.unique())
-plt.figure(figsize = (20, 10))
-file_long = heatmap_df2.pivot("Weekday", "Hour", "Crash_Count")
-sns.heatmap(file_long, cmap = 'viridis', annot=True, fmt=".0f")
-plt.title("Heatmap of Crash Count in New York City (Weekly vs Hourly)", fontsize = 14);
-plt.savefig('Heatmap2.jpg')
-```
+library(gbm)
+gbmboosting <- gbm(checkout_count_hr~.,data =  train, n.trees=500, interaction.depth = 3,shrinkage = 0.05)
+gbmpred <- round(predict(gbmboosting, newdata = train, n.trees = 500))
 
-The output from this code is shown below:
-![Image of Plot](images/Heatmap2.jpg)
-
-#### GMAPS Heatmap on NYC
-
-```
-#------------------------Visualizing using Gmaps-------------------------------
-
-locations=pd.DataFrame(results_df[['latitude','longitude']])
-locations[['latitude','longitude']] = locations[['latitude','longitude']].astype(float) #Latitude and Longitude data are stored as float
-
-gmaps.configure(api_key='Key Here') #GMAPS API key is inserted
-nyc_coordinates = (40.7128, -74.0060)
-fig = gmaps.figure(center=nyc_coordinates, zoom_level=10.5) #Map co-ordinates along with zoom level is set
-heatmap_layer=gmaps.heatmap_layer(locations) #heatmap layer is created using latitude,longitude
-heatmap_layer.max_intensity = 200
-heatmap_layer.point_radius = 15
-fig.add_layer(heatmap_layer)
-embed_minimal_html('Heatmap_layer.html', views=[fig]) #heatmap file is exported in save directory
+#mean(gbmpred==train$checkout_count_hr)
+summary(gbmboosting)
+eval_results(train$checkout_count_hr,gbmpred,train)
 ```
 
 The output from this code is shown below:
-![Image of Plot](images/map.png)
+![Image of Plot](images/boost_result.jpg)
 
 ---
 
