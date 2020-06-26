@@ -23,58 +23,50 @@ To predict the checkout count of Citi Bikes at a given hour in Jersey City, ther
 
 ## Explanation of the Code
 
-The code, `API_NYC_crashdata.py`, begins by importing necessary Python packages:
+The code, `citibike.R`, begins by importing necessary R libraries:
 ```
-import matplotlib.pyplot as plt
-import pandas as pd
-from sodapy import Socrata
-import seaborn as sns
-import gmaps
-from ipywidgets.embed import embed_minimal_html
+library(dplyr)
+library(tidyverse)
+library(broom)
+library(ggmap)
+library(moments)
+library(gbm)
+library(rpart)
+library(randomforest)
+library(glmnet)
 ```
-- *Note:The following packages need to be installed:* 
-- *pip install seaborn*
-- *pip install sodapy*
-- *pip install gmaps (If using Jupyter notebook $ jupyter nbextension enable --py --sys-prefix gmaps)*
-- *pip install ipywidgets.embed*
-
-We then import data from NYC Open Data using User Credentials and API Token by calling API:
-```
-username = input("Enter the Username") # Prompts the user credentials for the API
-password = input("Enter the password") 
-MyAppToken = input('Enter the app token')
-client = Socrata('data.cityofnewyork.us', MyAppToken, username=username,password=password)
-results = client.get("h9gi-nx95", limit=100000) # get() pulls the dynamic data from the API.
-results_df = pd.DataFrame.from_records(results) 
-```
-- *NOTE 1: The data pulled using API is in json format and it is converted to a data frame named "results_df".*  
+- *NOTE 1: The CitiBike data pulled can also be pulled using API in json format.*  
 - *NOTE 2: The data may change over time and the results may not be same everytime.*
+
+Day, month and Year are extracted
 ```
-results_df['year'] = pd.DatetimeIndex(results_df['crash_date']).year # year, month, weekday and hour features are extracted from crash_date
-results_df['month'] = pd.DatetimeIndex(results_df['crash_date']).month
-results_df['weekday'] = pd.DatetimeIndex(results_df['crash_date']).weekday
-results_df['hour'] = pd.DatetimeIndex(results_df['crash_time']).hour
-df1=results_df[(results_df.year >= 2019)] # The crash data on and after 2019 year is used for visualization
+#extracting date,month,year,time
+fulln_model$month = months(as.Date(fulln_model$date))
+fulln_model$day = weekdays(as.Date(fulln_model$date))
+tm1.lt <- as.POSIXlt(fulln$starttime)
+fulln_model$hour=tm1.lt$hour
 ```
 
 
 ### Data Visualization:
 #### Visualization of prominent Contributing Factors using Stacked Bar and Pie Chart
 ```
-#---------------------Bar plot------------------------------------------------
+#---------------------GMAPS------------------------------------------------
 
-newframe = pd.DataFrame(df1.groupby(['contributing_factor_vehicle_1'])['number_of_persons_killed'].count()) # Counts the number of Accidents
-newframe1 = pd.DataFrame(df1.groupby(['contributing_factor_vehicle_1'])['number_of_persons_injured'].sum()) #Counts the number of persons injured
-newframe2 = pd.merge(newframea, newframe1, on='Cause') # Merges the top contributing factors' accident counts and their respective number of injuries
-newframe2 = newframe2.head(5) # Picks the top contributing factors
-newframe2 = newframe2.rename(columns = {"number_of_persons_injured":"No. of Persons Injured", "number_of_persons_killed":"No. of Accidents"})
-fig,(ax1,ax2) =plt.subplots(2,1,figsize = (12,12))   # Fixes the size and subplot place
-ax = newframe2.plot.bar(rot=0,ax=ax1, width = 0.7)   # Plots the stacked bar plot 
-ax.legend(fontsize = 14)
-ax.xaxis.label.set_size(14)
-ax.set_title('Top Five Accident Contributing Factors', fontsize = 15)
-plt.xticks(fontsize = 9, wrap = True)
+library(ggmap)
+ggmap::register_google(key = "YOUR KEY")
 
+p <- ggmap(get_googlemap(maptype="terrain",zoom=11,center = c(lon = 74.0431, lat = 40.7178)))
+p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', incidents, alpha=0.25, size = 0.5) + 
+  theme(legend.position="bottom")
+p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', i2rain, alpha=0.25, size = 0.5) + 
+  theme(legend.position="bottom")
+  
+Finally, we visualize the data.  We save our plot as a `.jpeg` image:
+```
+The output from this code is shown below:
+![Image of Plot](images/GMAPS.jpeg)
+```
 #---------------------Weather Data merge-------------------------------------------------
 darksky=read.csv('G:/project/dark_sky.csv', header=TRUE)
 fulln_model=fulln[,c("starttime","stoptime","start.station.id","end.station.id","date")]
@@ -99,10 +91,10 @@ darksky$dthr=paste(darksky$date,darksky$hour, sep="")
 fulln_model$dthr=paste(fulln_model$date,fulln_model$hour, sep="")
 fi=merge(fulln_model,darksky,by.x = "dthr",by.y = "dthr")
 ```
-Finally, we visualize the data.  We save our plot as a `.jpeg` image:
+The merge of weather with CitiBike data is shown:
 
 The output from this code is shown below:
-![Image of Plot](images/GMAPS.jpeg)
+![Image of Plot](images/merge.jpg)
 
 #### Heatmap (Monthly vs Weekly)
 
