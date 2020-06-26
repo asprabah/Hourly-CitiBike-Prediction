@@ -59,7 +59,7 @@ Finally, we visualize the data.  We save our plot as a `.jpeg` image:
 ```
 The output from this code is shown below:
 ![Image of Plot](images/GMAPS.jpeg)
-Distribution of trips at different hour
+
 ![Image of Plot](images/trip_hr.png)
 
 ```
