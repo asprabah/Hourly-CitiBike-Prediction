@@ -6,7 +6,6 @@ Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ## Intro
 To predict the checkout count of Citi Bikes at a given hour in Jersey City, thereby, determining the influence of weather on stations with high checkout frequency
-![Image of Plot](images/Flow chart.png)
 
 ---
 
