@@ -95,6 +95,8 @@ The merge of weather with CitiBike data is shown:
 
 ![Image of Plot](images/after_pred.jpg)
 
+---
+
 #### Model Framework:
 
 ![Image of Plot](images/model_frame.JPG)
