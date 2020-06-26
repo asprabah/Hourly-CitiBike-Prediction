@@ -2,7 +2,7 @@
 
 # Visualization of New York City Motor Vehicle Collisions Data 
 
-Authors: **Arvind Ram Karthikeyan**, **Harish Kannan Venkataramanan**, **Aravindh Siddharth Prabaharan** and **Praveen Mohan**
+Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ---
 
