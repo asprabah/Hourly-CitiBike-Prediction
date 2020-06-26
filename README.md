@@ -50,9 +50,9 @@ library(ggmap)
 ggmap::register_google(key = "YOUR KEY")
 
 p <- ggmap(get_googlemap(maptype="terrain",zoom=11,center = c(lon = 74.0431, lat = 40.7178)))
-p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', incidents, alpha=0.25, size = 0.5) + 
+p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'black', station, alpha=0.25, size = 0.5) + 
   theme(legend.position="bottom")
-p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', i2rain, alpha=0.25, size = 0.5) + 
+p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', checkout, alpha=0.25, size = 0.5) + 
   theme(legend.position="bottom")
   
 Finally, we visualize the data.  We save our plot as a `.jpeg` image:
