@@ -90,7 +90,6 @@ fi=merge(fulln_model,darksky,by.x = "dthr",by.y = "dthr")
 ```
 The merge of weather with CitiBike data is shown:
 
-The output from this code is shown below:
 ![Image of Plot](images/merge.jpg)
 
 #### Process for Filtering of predictors and Model framework used for modeling
@@ -128,7 +127,7 @@ The output from this code is shown below:
 
 *3. Click on run or Ctrl+Enter*
 
-*4. The Results are displayed in Global Environment(right) and the plots are shown (bottom right)*
+*4. The Results are displayed in Global Environment(right) and the plots are shown (bottom right) in R studio*
 
 ---
 
