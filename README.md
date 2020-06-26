@@ -92,11 +92,12 @@ The merge of weather with CitiBike data is shown:
 
 ![Image of Plot](images/merge.jpg)
 
-#### Process for Filtering of predictors and Model framework used for modeling
-![Image of Plot](images/predictor_flow.jpg)
+#### Predictor Influence on each model:
 
 Predictor Influence on each model:
 ![Image of Plot](images/after_pred.jpg)
+
+#### Model Framework:
 
 ![Image of Plot](images/model_frame.JPG)
 
