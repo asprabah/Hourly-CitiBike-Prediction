@@ -94,7 +94,6 @@ The merge of weather with CitiBike data is shown:
 
 #### Predictor Influence on each model:
 
-Predictor Influence on each model:
 ![Image of Plot](images/after_pred.jpg)
 
 #### Model Framework:
@@ -116,7 +115,6 @@ summary(gbmboosting)
 eval_results(train$checkout_count_hr,gbmpred,train)
 ```
 
-The output from this code is shown below:
 ![Image of Plot](images/boost_result.jpg)
 
 ---
