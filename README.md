@@ -97,13 +97,11 @@ The output from this code is shown below:
 ![Image of Plot](images/merge.jpg)
 
 #### Process for Filtering of predictors and Model framework used for modeling
-Predictor Filtering:
 ![Image of Plot](images/predictor_flow.jpg)
 
 Predictor Influence on each model:
 ![Image of Plot](images/after_pred.jpg)
 
-Model Framework:
 ![Image of Plot](images/model_frame.jpg)
 
 
