@@ -16,7 +16,7 @@ To predict the checkout count of Citi Bikes at a given hour in Jersey City, ther
 ---
 
 ## Sources
-- The data came from [CitiBike](https://www.citibikenyc.com/system-data)
+- The data source is from [CitiBike](https://www.citibikenyc.com/system-data)
 - The code retrieves weather data from [Darksky API](https://darksky.net/dev)
 - The link to use [Gmap](https://cloud.google.com/maps-platform/)
 ---
@@ -75,23 +75,31 @@ ax.xaxis.label.set_size(14)
 ax.set_title('Top Five Accident Contributing Factors', fontsize = 15)
 plt.xticks(fontsize = 9, wrap = True)
 
-#---------------------Pie plot-------------------------------------------------
-newframe3 = pd.DataFrame(df1.groupby(['contributing_factor_vehicle_1'])['number_of_persons_killed'].sum()) # Sums the number of persons killed
-Others = sum(newframe3['number_of_persons_killed']==1) # Adds the killed values that is equal to 1 to "Other" contributing factor
-newframe3=newframe3[newframe3['number_of_persons_killed']>1] # Picks the contributing factor where the killed is greater than 1
-newframe3 = newframe3.append({'number_of_persons_killed':Others,'Cause':'Others'},ignore_index=True) # Adds the "Other" to the rows
-newframe3 = newframe3.head(7) # Picks only top seven contributing factor
-newframe3['number_of_persons_killed'] = round((newframe3['number_of_persons_killed']/a)*100,0) # Calculates the percetage of death by each contributing factor in total kills
+#---------------------Weather Data merge-------------------------------------------------
+darksky=read.csv('G:/project/dark_sky.csv', header=TRUE)
+fulln_model=fulln[,c("starttime","stoptime","start.station.id","end.station.id","date")]
 
-ax2.pie(newframe3['number_of_persons_killed'],labels=newframe3['Cause'],autopct='%1.1f%%') # Plots the Pie chart
-ax2.set_title('% of Mortality by each Factor', fontsize = 15)
-plt.savefig('Bar_Pie.png')
+#extracting date,month,year,time
+fulln_model$month = months(as.Date(fulln_model$date))
+fulln_model$day = weekdays(as.Date(fulln_model$date))
+tm1.lt <- as.POSIXlt(fulln$starttime)
+fulln_model$hour=tm1.lt$hour
+
+#extracting date,month,year,time for weather
+darksky$date = as.Date(darksky$time, format = "%Y-%m-%d")
+tm2.lt <- as.POSIXlt(darksky$time)
+darksky$hour=tm2.lt$hour
+
+#remove unwanted columns weather
+darksky=subset(darksky, select=-c(summary,icon,precipIntensity,precipProbability,precipType,precipAccumulation,                                ozone,uvIndex,windGust,windBearing,cloudCover,apparentTemperature))
+darksky=darksky[!duplicated(darksky$time), ]
+
+#Merging weather with model
+darksky$dthr=paste(darksky$date,darksky$hour, sep="")
+fulln_model$dthr=paste(fulln_model$date,fulln_model$hour, sep="")
+fi=merge(fulln_model,darksky,by.x = "dthr",by.y = "dthr")
 ```
-Finally, we visualize the data.  We save our plot as a `.png` image:
-```
-plt.savefig('Bar_Pie.png')	
-plt.show()
-```
+Finally, we visualize the data.  We save our plot as a `.jpeg` image:
 
 The output from this code is shown below:
 ![Image of Plot](images/GMAPS.jpeg)
@@ -145,23 +153,14 @@ The output from this code is shown below:
 
 ---
 
-## How to Run the Code
-### Using Terminal
-*1. Open a terminal window.*
-
-*2. Change directories to where `API_NYC_crashdata.py` is saved.*
-
-*3. Type the following command:*
-	```
-	python API_NYC_crashdata.py
-	```
-    
-### Using Spyder/ Jupyter
+## How to Run the Code using R Studio
 *1. Click on File->Open*
 
-*2. Choose directory where `API_NYC_crashdata.py` is stored*
+*2. Choose directory where `citibike.R` is stored*
 
-*3. Click on run or press F5 on Spyder, Shift+Enter in Jupyter*
+*3. Click on run or Ctrl+Enter*
+
+*4. The Results are displayed in Global Environment(right) and the plots are shown (bottom right)*
 
 ---
 
