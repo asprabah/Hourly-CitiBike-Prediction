@@ -4,13 +4,7 @@ Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ---
 
-## Introduction
-*Largest network in United States; imperative for transportation infrastructure.*
-*Durable bikes locked in network of docking station  (Available 24/7).*
-*Access available in Manhattan, Brooklyn, Queens and Jersey City.*
-*May, 2019 bikes available to rent on Lyft Application.*
-
-## Objective
+## Intro
 To predict the checkout count of Citi Bikes at a given hour in Jersey City, thereby, determining the influence of weather on stations with high checkout frequency
 ![Image of Plot](images/Flow chart.png)
 
@@ -50,7 +44,6 @@ fulln_model$hour=tm1.lt$hour
 
 
 ### Data Visualization:
-#### Visualization of Stations
 ```
 #------------------------Visualizing using Gmaps-------------------------------
 
