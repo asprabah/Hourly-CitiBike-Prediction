@@ -4,15 +4,8 @@ Authors:  **Aravindh Siddharth Prabaharan**, **Arvind Ram Karthikeyan**
 
 ---
 
-## Introduction
-*Largest network in United States; imperative for transportation infrastructure.*
-*Durable bikes locked in network of docking station  (Available 24/7).*
-*Access available in Manhattan, Brooklyn, Queens and Jersey City.*
-*May, 2019 bikes available to rent on Lyft Application.*
-
-## Objective
+## Intro
 To predict the checkout count of Citi Bikes at a given hour in Jersey City, thereby, determining the influence of weather on stations with high checkout frequency
-![Image of Plot](images/Flow chart.png)
 
 ---
 
@@ -50,7 +43,6 @@ fulln_model$hour=tm1.lt$hour
 
 
 ### Data Visualization:
-#### Visualization of Stations
 ```
 #------------------------Visualizing using Gmaps-------------------------------
 
@@ -58,16 +50,16 @@ library(ggmap)
 ggmap::register_google(key = "YOUR KEY")
 
 p <- ggmap(get_googlemap(maptype="terrain",zoom=11,center = c(lon = 74.0431, lat = 40.7178)))
-p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', incidents, alpha=0.25, size = 0.5) + 
+p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'black', station, alpha=0.25, size = 0.5) + 
   theme(legend.position="bottom")
-p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', i2rain, alpha=0.25, size = 0.5) + 
+p + geom_point(aes(x =Start_Lng , y =Start_Lat ),colour = 'red', checkout, alpha=0.25, size = 0.5) + 
   theme(legend.position="bottom")
   
 Finally, we visualize the data.  We save our plot as a `.jpeg` image:
 ```
 The output from this code is shown below:
 ![Image of Plot](images/GMAPS.jpeg)
-Distribution of trips at different hour
+
 ![Image of Plot](images/trip_hr.png)
 
 ```
@@ -97,14 +89,15 @@ fi=merge(fulln_model,darksky,by.x = "dthr",by.y = "dthr")
 ```
 The merge of weather with CitiBike data is shown:
 
-The output from this code is shown below:
 ![Image of Plot](images/merge.jpg)
 
-#### Process for Filtering of predictors and Model framework used for modeling
-![Image of Plot](images/predictor_flow.jpg)
+#### Predictor Influence on each model:
 
-Predictor Influence on each model:
 ![Image of Plot](images/after_pred.jpg)
+
+---
+
+#### Model Framework:
 
 ![Image of Plot](images/model_frame.JPG)
 
@@ -123,7 +116,6 @@ summary(gbmboosting)
 eval_results(train$checkout_count_hr,gbmpred,train)
 ```
 
-The output from this code is shown below:
 ![Image of Plot](images/boost_result.jpg)
 
 ---
@@ -135,7 +127,7 @@ The output from this code is shown below:
 
 *3. Click on run or Ctrl+Enter*
 
-*4. The Results are displayed in Global Environment(right) and the plots are shown (bottom right)*
+*4. The Results are displayed in Global Environment(right) and the plots are shown (bottom right) in R studio*
 
 ---
 

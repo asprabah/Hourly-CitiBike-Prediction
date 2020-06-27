@@ -4,28 +4,14 @@
 #CSV compilation--------------------------------------------------
 
 d3=read.csv('G:/JC-201903-citibike-tripdata.csv', header=TRUE)
-d4=read.csv('G:/JC-201904-citibike-tripdata.csv', header=TRUE)
-d5=read.csv('G:/JC-201905-citibike-tripdata.csv', header=TRUE)
-d6=read.csv('G:/JC-201906-citibike-tripdata.csv', header=TRUE)
-d7=read.csv('G:/JC-201907-citibike-tripdata.csv', header=TRUE)
-d8=read.csv('G:/JC-201908-citibike-tripdata.csv', header=TRUE)
-d9=read.csv('G:/JC-201909-citibike-tripdata.csv', header=TRUE)
-d10=read.csv('G:/JC-201910-citibike-tripdata.csv', header=TRUE)
-d11=read.csv('G:/JC-201911-citibike-tripdata.csv', header=TRUE)
-d12=read.csv('G:/JC-201912-citibike-tripdata.csv', header=TRUE)
-d13=read.csv('G:/JC-202001-citibike-tripdata.csv', header=TRUE)
+.
+.
+.
 d14=read.csv('G:/JC-202002-citibike-tripdata.csv', header=TRUE)
 d3$date = as.Date(d3$starttime, format = "%Y-%m-%d")
-d4$date = as.Date(d4$starttime, format = "%Y-%m-%d")
-d5$date = as.Date(d5$starttime, format = "%Y-%m-%d")
-d6$date = as.Date(d6$starttime, format = "%Y-%m-%d")
-d7$date = as.Date(d7$starttime, format = "%Y-%m-%d")
-d8$date = as.Date(d8$starttime, format = "%Y-%m-%d")
-d9$date = as.Date(d9$starttime, format = "%Y-%m-%d")
-d10$date = as.Date(d10$starttime, format = "%Y-%m-%d")
-d11$date = as.Date(d11$starttime, format = "%Y-%m-%d")
-d12$date = as.Date(d12$starttime, format = "%Y-%m-%d")
-d13$date = as.Date(d13$starttime, format = "%Y-%m-%d")
+.
+.
+.
 d14$date = as.Date(d14$starttime, format = "%Y-%m-%d")
 zfull=rbind(d3,d4,d5,d6,d7,d8,d9,d10,d11,d12,d13,d14)
 sum(is.na(zfull))
