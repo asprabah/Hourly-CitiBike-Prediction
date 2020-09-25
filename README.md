@@ -1,6 +1,6 @@
 # Hourly CitiBike Prediction in Jersey City
 
-Author:  **Aravindh Siddharth Prabaharan**
+Authors:  **Aravindh Siddharth Prabaharan**,**Arvind Ram Karthikeyan**
 
 ---
 
